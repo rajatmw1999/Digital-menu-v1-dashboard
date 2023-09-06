@@ -1,0 +1,128 @@
+.home-page-wrapper {
+    margin: 0 2vw;
+
+    .add-btn-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 5vh;
+        height: 5vh;
+        border-radius: 50%;
+        background-color: grey;
+        font-size: 2vw;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .outer-category-div {
+        display: flex;
+        gap: 4vw;
+        align-items: center;
+        flex-wrap: wrap;
+
+        .add-btn-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 20vh;
+            height: 20vh;
+            border-radius: 50%;
+            background-color: grey;
+            font-size: 5vw;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+
+        .mat-card-class {
+            padding: 0;
+        }
+
+        .card-content-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .button-wrapper {
+                display: flex;
+                gap: 1vw;
+            }
+
+            .name {
+                font-size: 2vw;
+                padding: 0;
+                margin: 0;
+            }
+
+            .desc {
+                padding: 0;
+                margin: 0;
+                font-size: 1vw;
+            }
+
+            .category-img {
+                width: 20vw;
+                height: 20vh;
+                object-fit: cover;
+            }
+        }
+    }
+
+    .main-title {
+        font-size: 2vw;
+        margin: 0;
+    }
+
+    .main-desc {
+        font-size: 1vw;
+        margin: 0;
+    }
+}
+
+#exampleModal {
+    .inner-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .image-div {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+        }
+
+        .heading {
+            font-size: 1.5vw;
+        }
+
+        mat-form-field {
+            width: 100%;
+        }
+    }
+}
+
+#exampleModalEdit {
+    .inner-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .image-div {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+        }
+
+        .heading {
+            font-size: 1.5vw;
+        }
+
+        mat-form-field {
+            width: 100%;
+        }
+    }
+}

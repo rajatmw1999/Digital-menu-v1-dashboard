@@ -1,0 +1,29 @@
+<div class="outer-div">
+    <mat-card>
+        <mat-card-content>
+            <form class="example-form">
+                <p class="heading">Virtual Menu Admin</p>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>Email</mat-label>
+                    <input (input)="handleInput($event, 'username')" matInput placeholder="example@example.com">
+                </mat-form-field>
+
+                <br />
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>Password</mat-label>
+                    <input type="password" (input)="handleInput($event, 'password')" matInput
+                        placeholder="Enter Password">
+                </mat-form-field>
+
+                <!-- <mat-form-field class="example-full-width">
+                    <mat-label>Leave a comment</mat-label>
+                    <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+                </mat-form-field> -->
+                <br />
+                <a (click)="handleLogin()" mat-raised-button color="primary">Sign In</a>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

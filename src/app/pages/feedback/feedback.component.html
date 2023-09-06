@@ -1,0 +1,38 @@
+<app-navbar></app-navbar>
+<br /><br />
+<div *ngIf="loading == false" class="feedback-outer-div">
+    <table id="customers">
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Food Rating</th>
+            <th>Staff Rating</th>
+            <th>Comments</th>
+            <th>Ambience Rating</th>
+            <th>Served Well</th>
+            <th>Menu Selection</th>
+            <th>Suggest Akra</th>
+            <th>Manager Table</th>
+            <th>DOB</th>
+            <th>DOA</th>
+
+        </tr>
+        <tr *ngFor="let fd of feedbackList">
+            <td>{{fd.name}}</td>
+            <td>{{fd.phone}}</td>
+            <td>{{fd.foodRating}}</td>
+            <td>{{fd.staffRating}}</td>
+            <td>{{fd.comments}}</td>
+            <td>{{fd.ambienceRating}}</td>
+            <td>{{fd.servedWell == 0 ? 'True' : 'False'}}</td>
+            <td>{{fd.menuSelection}}</td>
+            <td>{{fd.suggestAkra == 0 ? 'True' : 'False'}}</td>
+            <td>{{fd.managerTable == 0 ? 'True' : 'False'}}</td>
+            <td>{{fd.dob}}</td>
+            <td>{{fd.doa}}</td>
+        </tr>
+
+    </table>
+</div>
+
+<div *ngIf="loading == true" class="loader"></div>

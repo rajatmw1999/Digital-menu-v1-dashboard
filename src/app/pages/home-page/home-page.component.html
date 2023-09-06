@@ -1,0 +1,125 @@
+<app-navbar></app-navbar>
+<br /><br />
+<div class="home-page-wrapper">
+    <p class="main-title">Categories</p>
+    <p class="main-desc">Add, Edit or Delete categories inside your menu on this page.</p>
+    <div class="add-btn-wrapper" matTooltip="Add a new category to menu" data-bs-toggle="modal"
+        data-bs-target="#exampleModal">
+        +
+    </div>
+    <br />
+    <div *ngIf="loading == false" class="outer-category-div">
+        <mat-card *ngFor="let category of categoryList" class="mat-card-class">
+            <mat-card-content class="card-content-body">
+                <img class="category-img" [src]="getImageURL(category.cImageURL)" />
+                <p class="name">{{category.cName}}</p>
+                <p class="desc">{{category.cDesc.substring(0,40)}}..</p>
+                <p class="desc">Menu: {{category.mainMenuName}}</p>
+                <br />
+                <div class="button-wrapper">
+                    <button data-bs-toggle="modal" data-bs-target="#exampleModalEdit"
+                        (click)="editCategoryClicked(category)" mat-flat-button color="primary">EDIT</button>
+                    <button (click)="handleDeleteCategory(category)" mat-flat-button color="warn">DELETE</button>
+                </div>
+                <br />
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <!-- <p >Loading...</p> -->
+    <div *ngIf="loading == true" class="loader"></div>
+    <div *ngIf="loading == false && categoryList == []">No items to display</div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog menu-modal">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="inner-wrapper">
+                    <p class="heading">Add a new Category</p>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Category Name</mat-label>
+                        <input (input)="handleCategoryCreateInput($event, 'name')" matInput placeholder="Shakes">
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Category Description</mat-label>
+                        <input (input)="handleCategoryCreateInput($event, 'desc')" matInput
+                            placeholder="Enjoy juicy fruity and delicious shakes">
+                    </mat-form-field>
+
+                    <div class="image-div">
+                        <mat-label>Add image</mat-label>
+                        <input id="create-category-pic" type="file" (change)="uploadFile($event)">
+                    </div>
+
+                    <br />
+
+                    <select class="form-select" aria-label="Default select example" (change)="changeMainMenu($event)">
+                        <option selected>Select Main Menu Option</option>
+                        <option value="1">FOOD MENU</option>
+                        <option value="2">BEVERAGES</option>
+                        <option value="3">SHISHA</option>
+                        <!-- <option value="3">Three</option> -->
+                    </select>
+
+                    <br />
+                    <button *ngIf="creatingCategory == false" mat-flat-button (click)="submitCategory()"
+                        color="primary">SUBMIT</button>
+                    <p *ngIf="creatingCategory == true"> Creating Category... don't refresh</p>
+
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+    <div class="modal-dialog menu-modal">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="inner-wrapper">
+                    <p class="heading">Edit Category</p>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Category Name</mat-label>
+                        <input (input)="handleCategoryEditInput($event, 'name')" value="{{editCategoryName}}" matInput
+                            placeholder="Shakes">
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Category Description</mat-label>
+                        <input (input)="handleCategoryEditInput($event, 'desc')" matInput value="{{editCategoryDesc}}"
+                            placeholder="Enjoy juicy fruity and delicious shakes">
+                    </mat-form-field>
+
+                    <div class="image-div">
+                        <mat-label>Add image</mat-label>
+                        <input id="edit-category-pic" type="file" (change)="uploadFileEdit($event)">
+                    </div>
+
+                    <br />
+
+                    <select class="form-select" aria-label="Default select example" value="{{editCategoryMenu}}"
+                        (change)="changeMainMenuEdit($event)">
+                        <option selected>Select Main Menu Option</option>
+                        <option value="1">FOOD MENU</option>
+                        <option value="2">SHISHA AND BEVERAGES</option>
+                        <!-- <option value="3">Three</option> -->
+                    </select>
+
+                    <br />
+                    <button *ngIf="editingCategory == false" mat-flat-button (click)="handleSubmitEditCategory()"
+                        color="primary">Edit</button>
+                    <p *ngIf="editingCategory == true"> Editing Category... don't refresh</p>
+
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

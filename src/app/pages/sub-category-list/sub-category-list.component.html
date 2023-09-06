@@ -1,0 +1,137 @@
+<app-navbar></app-navbar>
+<br /><br />
+<div class="home-page-wrapper">
+    <p class="main-title">Sub Categories</p>
+    <p class="main-desc">Add, Edit or Delete items inside your menu on this page.</p>
+    <div class="add-btn-wrapper" matTooltip="Add a new sub category to menu" data-bs-toggle="modal"
+        data-bs-target="#exampleModal">
+        +
+    </div>
+    <br />
+    <div *ngIf="loading == false" class="outer-category-div">
+        <mat-card *ngFor="let item of itemsList" class="mat-card-class">
+            <mat-card-content class="card-content-body">
+                <img class="category-img" [src]="getImageURL(item.cImageURL)" />
+                <p class="name">{{item.cName}}</p>
+                <p class="desc">{{item.cDesc.substring(0,40)}}..</p>
+                <p class="desc">Category ID: {{item.iCategoryPK}}</p>
+                <!-- <p class="desc">Price: Rs. {{item.cPrice}}</p> -->
+                <br />
+                <div class="button-wrapper">
+                    <button data-bs-toggle="modal" data-bs-target="#exampleModalEdit" (click)="editItemClicked(item)"
+                        mat-flat-button color="primary">EDIT</button>
+                    <button (click)="handleDeleteItem(item)" mat-flat-button color="warn">DELETE</button>
+                </div>
+                <br />
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <!-- <p >Loading...</p> -->
+    <div *ngIf="loading == true" class="loader"></div>
+    <div *ngIf="loading == false && itemsList == []">No items to display</div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog menu-modal">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="inner-wrapper">
+                    <p class="heading">Add a new Item</p>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Item Name</mat-label>
+                        <input (input)="handleItemCreateInput($event, 'name')" matInput placeholder="Shakes">
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Item Description</mat-label>
+                        <input (input)="handleItemCreateInput($event, 'desc')" matInput
+                            placeholder="Enjoy juicy fruity and delicious shakes">
+                    </mat-form-field>
+
+                    <!-- <mat-form-field class="example-full-width">
+                        <mat-label>Item Price</mat-label>
+                        <input (input)="handleItemCreateInput($event, 'price')" matInput type="number"
+                            placeholder="10">
+                    </mat-form-field> -->
+
+                    <div class="image-div">
+                        <mat-label>Add image</mat-label>
+                        <input id="create-item-pic" type="file" (change)="uploadFile($event)">
+                    </div>
+
+                    <br />
+
+                    <select class="form-select" aria-label="Default select example" (change)="changeCategory($event)">
+                        <option selected>Select Category</option>
+                        <option *ngFor="let category of categoriesList" [value]="category.iSno">{{category.cName}}
+                        </option>
+                        <!-- <option value="2">SHISHA AND BEVERAGES</option> -->
+                        <!-- <option value="3">Three</option> -->
+                    </select>
+
+                    <br />
+                    <button *ngIf="creatingSubCategory == false" mat-flat-button (click)="submitItem()"
+                        color="primary">SUBMIT</button>
+                    <p *ngIf="creatingSubCategory == true"> Creating Sub Category... don't refresh</p>
+
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+    <div class="modal-dialog menu-modal">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="inner-wrapper">
+                    <p class="heading">Edit Item</p>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Item Name</mat-label>
+                        <input (input)="handleItemEditInput($event, 'name')" value="{{editSubCategoryName}}" matInput
+                            placeholder="Shakes">
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Item Description</mat-label>
+                        <input (input)="handleItemEditInput($event, 'desc')" matInput value="{{editSubCategoryDesc}}"
+                            placeholder="Enjoy juicy fruity and delicious shakes">
+                    </mat-form-field>
+
+                    <!-- <mat-form-field class="example-full-width">
+                        <mat-label>Item Price</mat-label>
+                        <input (input)="handleItemEditInput($event, 'price')" matInput value="{{editItemPrice}}"
+                            placeholder="10" type="number">
+                    </mat-form-field> -->
+
+                    <div class="image-div">
+                        <mat-label>Add image</mat-label>
+                        <input id="edit-item-pic" type="file" (change)="uploadFileEdit($event)">
+                    </div>
+
+                    <br />
+
+                    <select class="form-select" aria-label="Default select example" value="{{editSubCatCategorySno}}"
+                        (change)="changeCategoryEdit($event)">
+                        <option selected>Select Category</option>
+                        <option *ngFor="let category of categoriesList" [value]="category.iSno">{{category.cName}}
+                        </option>
+                    </select>
+
+                    <br />
+                    <button *ngIf="editingSubCategory == false" mat-flat-button (click)="handleSubmitEditItem()"
+                        color="primary">Edit</button>
+                    <p *ngIf="editingSubCategory == true"> Editing Sub Category... don't refresh</p>
+
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
